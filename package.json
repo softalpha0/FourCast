@@ -1,0 +1,31 @@
+{
+  "name": "fourcast",
+  "version": "1.0.0",
+  "description": "Full-lifecycle DeFi agent for Four.meme on BNB Chain — bonding curve oracle, capital router, and position manager",
+  "type": "module",
+  "scripts": {
+    "start": "node --import tsx/esm index.ts",
+    "dev": "PAPER_TRADING=true node --import tsx/esm index.ts",
+    "api": "PORT=3002 node --import tsx/esm src/api.ts",
+    "agent": "node --import tsx/esm src/agent.ts"
+  },
+  "dependencies": {
+    "@four-meme/four-meme-ai": "^1.0.8",
+    "@openserv-labs/sdk": "^2.4.1",
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^16.4.5",
+    "express": "^5.0.0",
+    "viem": "^2.21.0",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/bcryptjs": "^2.4.6",
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.0.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.7.0"
+  },
+  "engines": {
+    "node": ">=22.0.0"
+  }
+}
