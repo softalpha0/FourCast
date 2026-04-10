@@ -1,7 +1,7 @@
 'use client';
 import { useState } from 'react';
 import Link from 'next/link';
-import type { CurveWithScore, MetaMap } from '@/app/dashboard/page';
+import type { CurveWithScore, MetaMap } from '@/types';
 import { BuyModal } from './TradeModal';
 
 function shortAddr(addr: string) {

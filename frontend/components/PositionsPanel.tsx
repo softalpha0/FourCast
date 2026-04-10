@@ -1,7 +1,7 @@
 'use client';
 import { useState } from 'react';
 import Link from 'next/link';
-import type { Position, MetaMap } from '@/app/dashboard/page';
+import type { Position, MetaMap } from '@/types';
 import { CloseModal } from './TradeModal';
 
 function shortAddr(addr: string) {

@@ -1,5 +1,5 @@
 'use client';
-import type { SystemStatus, Position, LPYield } from '@/app/page';
+import type { SystemStatus, Position, LPYield } from '@/types';
 
 interface MetricsBarProps {
   status:    SystemStatus | null;

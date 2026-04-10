@@ -1,6 +1,6 @@
 'use client';
 import Link from 'next/link';
-import type { LPYield, MetaMap } from '@/app/dashboard/page';
+import type { LPYield, MetaMap } from '@/types';
 
 function shortAddr(addr: string) {
   return `${addr.slice(0, 6)}…${addr.slice(-4)}`;

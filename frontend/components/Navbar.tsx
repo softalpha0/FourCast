@@ -1,6 +1,6 @@
 'use client';
 import Link from 'next/link';
-import type { SystemStatus } from '@/app/page';
+import type { SystemStatus } from '@/types';
 
 interface NavbarProps {
   status:      SystemStatus | null;
