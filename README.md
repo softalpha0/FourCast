@@ -108,10 +108,10 @@ Scorer     Oracle
 
 ## Tech Stack
 
-**Backend:** Node.js 22, TypeScript (tsx/esm), Express 5, viem, zod, OpenServ SDK
-**Frontend:** Next.js 14, React 18, Tailwind CSS
-**AI:** Groq API (Llama 3.3 70B), OpenServ agent platform
-**Chain:** BNB Smart Chain Mainnet (chain ID 56)
+**Backend:** Node.js 22, TypeScript, Express 5, viem
+**Frontend:** Next.js 14, Tailwind CSS
+**AI:** Groq API (Llama 3.3 70B)
+**Chain:** BNB Smart Chain Mainnet
 **DEX:** PancakeSwap V2
 
 ---
