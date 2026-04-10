@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import Logo from '@/components/Logo';
 
 const API = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:3000';
 
@@ -151,17 +152,7 @@ export default function Landing() {
           backdropFilter: 'blur(16px)',
         }}
       >
-        <div className="flex items-center gap-2">
-          <svg width="26" height="26" viewBox="0 0 28 28" fill="none">
-            <rect width="28" height="28" rx="7" fill="#f59e0b" fillOpacity="0.12" />
-            <path d="M7 20 L14 8 L21 20" stroke="#f59e0b" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-            <path d="M10 16 L18 16" stroke="#f59e0b" strokeWidth="2" strokeLinecap="round" />
-            <circle cx="14" cy="8" r="2" fill="#f59e0b" />
-          </svg>
-          <span className="font-bold text-base tracking-tight">
-            Four<span style={{ color: '#f59e0b' }}>Cast</span>
-          </span>
-        </div>
+        <Logo size={28} showText />
 
         <nav className="hidden md:flex items-center gap-8 text-sm" style={{ color: '#8fa3c0' }}>
           <a href="#features" className="hover:text-amber-400 transition-colors">Features</a>
@@ -528,10 +519,7 @@ export default function Landing() {
         style={{ borderTop: '1px solid #1e2f5055', color: '#3d5070' }}
       >
         <div className="flex items-center gap-2">
-          <svg width="18" height="18" viewBox="0 0 28 28" fill="none">
-            <path d="M7 20 L14 8 L21 20" stroke="#f59e0b" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-            <path d="M10 16 L18 16" stroke="#f59e0b" strokeWidth="2" strokeLinecap="round" />
-          </svg>
+          <Logo size={18} />
           <span>FourCast v1.0.0 · Four.meme DeFi Intelligence on BNB Chain</span>
         </div>
         <div className="flex items-center gap-4">

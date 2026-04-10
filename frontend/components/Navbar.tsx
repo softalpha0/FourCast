@@ -1,6 +1,7 @@
 'use client';
 import Link from 'next/link';
 import type { SystemStatus } from '@/types';
+import Logo from '@/components/Logo';
 
 interface NavbarProps {
   status:      SystemStatus | null;
@@ -31,17 +32,7 @@ export default function Navbar({ status, connected, lastRefresh, onRefresh }: Na
       </Link>
 
       <div className="flex items-center gap-3">
-        <div className="flex items-center gap-2">
-          <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
-            <rect width="28" height="28" rx="7" fill="#f59e0b" fillOpacity="0.12" />
-            <path d="M7 20 L14 8 L21 20" stroke="#f59e0b" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-            <path d="M10 16 L18 16" stroke="#f59e0b" strokeWidth="2" strokeLinecap="round" />
-            <circle cx="14" cy="8" r="2" fill="#f59e0b" />
-          </svg>
-          <span className="font-bold text-base tracking-tight" style={{ color: 'var(--text-hi)' }}>
-            Four<span style={{ color: '#f59e0b' }}>Cast</span>
-          </span>
-        </div>
+        <Logo size={30} showText />
         <span
           className="hidden sm:block text-xs px-2 py-0.5 rounded-full font-mono"
           style={{
