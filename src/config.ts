@@ -2,7 +2,7 @@ import 'dotenv/config';
 
 export const BSC_CHAIN_ID = 56;
 
-export const RPC_HTTP = process.env.BSC_RPC_HTTP ?? 'https://bsc-dataseed.bnbchain.org';
+export const RPC_HTTP = process.env.BSC_RPC_HTTP ?? 'https://bsc-rpc.publicnode.com';
 export const RPC_WS   = process.env.BSC_RPC_WS   ?? 'wss://bsc-rpc.publicnode.com';
 
 export const FOURMEME_PROXY = '0x5c952063c7fc8610FFDB798152D69F0B9550762b' as const;
