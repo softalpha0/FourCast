@@ -1,7 +1,7 @@
 import { type Request, type Response } from 'express';
 
-const GROQ_API = 'https://api.groq.com/openai/v1/chat/completions';
-const GROQ_KEY = process.env.GROQ_API_KEY ?? '';
+const DGRID_API = 'https://api.dgrid.ai/v1/chat/completions';
+const DGRID_KEY = process.env.DGRID_API_KEY ?? '';
 const FOURCAST_API = process.env.FOURCAST_API_URL ?? 'http://localhost:3000';
 
 interface GroqMessage {
@@ -254,8 +254,8 @@ async function callFourCastTool(name: string, args: Record<string, unknown>): Pr
 }
 
 export async function handleAgentChat(req: Request, res: Response): Promise<void> {
-  if (!GROQ_KEY) {
-    res.status(503).json({ error: 'GROQ_API_KEY not configured' });
+  if (!DGRID_KEY) {
+    res.status(503).json({ error: 'DGRID_API_KEY not configured' });
     return;
   }
 
@@ -272,14 +272,14 @@ export async function handleAgentChat(req: Request, res: Response): Promise<void
 
   try {
     for (let iteration = 0; iteration < 5; iteration++) {
-      const groqRes = await fetch(GROQ_API, {
+      const dgridRes = await fetch(DGRID_API, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${GROQ_KEY}`,
+          'Authorization': `Bearer ${DGRID_KEY}`,
         },
         body: JSON.stringify({
-          model: 'llama-3.3-70b-versatile',
+          model: 'groq/llama-3.3-70b-versatile',
           messages,
           tools: TOOLS,
           tool_choice: 'auto',
@@ -287,13 +287,13 @@ export async function handleAgentChat(req: Request, res: Response): Promise<void
         }),
       });
 
-      if (!groqRes.ok) {
-        const errText = await groqRes.text();
-        res.status(502).json({ error: `Groq error: ${errText}` });
+      if (!dgridRes.ok) {
+        const errText = await dgridRes.text();
+        res.status(502).json({ error: `DGrid error: ${errText}` });
         return;
       }
 
-      const data = await groqRes.json() as GroqResponse;
+      const data = await dgridRes.json() as GroqResponse;
       const msg = data.choices[0].message;
 
       messages.push(msg);

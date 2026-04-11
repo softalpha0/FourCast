@@ -68,7 +68,7 @@ export default function AgentPanel() {
             FourCast Agent
           </h2>
           <p className="text-xs mt-0.5" style={{ color: 'var(--text-lo)' }}>
-            Llama 3.3 70B · Four.meme intelligence
+            DGrid · Llama 3.3 70B · Four.meme intelligence
           </p>
         </div>
         <div className="flex items-center gap-1.5 text-xs px-2 py-1 rounded-md"

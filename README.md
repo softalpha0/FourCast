@@ -40,7 +40,7 @@ open_curve → (PairCreated detected) → open_pancake → closed_profit / close
 
 When Four.meme graduates a token, all LP tokens are burned — permanently locking liquidity that generates 0.17% swap fees forever with zero counterparty risk. FourCast tracks every graduated token's PancakeSwap V2 pair, monitors `Swap` events to calculate 24h volume, computes annualized yield on the burned LP value, and feeds this back into the scorer as the oracle signal.
 
-### AI Agent — Llama 3.3 70B via Groq
+### AI Agent — Llama 3.3 70B via DGrid
 
 A natural language interface with an agentic loop: the LLM decides which tools to call, chains multiple calls when needed, and synthesizes findings into a single response.
 
@@ -65,7 +65,7 @@ FourCast is built on the official [`@four-meme/four-meme-ai`](https://www.npmjs.
 | **On-chain events** | `TokenPurchase` events from the Four.meme proxy are the primary data source — every buy is indexed in real time to build fill%, velocity, and activity signals |
 | **Token info** | `TokenManagerHelper3.getTokenInfo` returns live offers, funds, price, and graduation status for each tracked token |
 
-The AI agent layer (Llama 3.3 70B via Groq) exposes these same capabilities as natural language tools — so you can ask *"get a buy quote for 0.05 BNB on this token"* and the agent calls `quoteBuy` on-chain and returns the real estimate.
+The AI agent layer (Llama 3.3 70B via DGrid) exposes these same capabilities as natural language tools — so you can ask *"get a buy quote for 0.05 BNB on this token"* and the agent calls `quoteBuy` on-chain and returns the real estimate.
 
 ---
 
@@ -97,7 +97,7 @@ Scorer     Oracle
   REST API (src/api.ts — port 3000)
   ├── /curves, /positions, /oracle
   ├── /trade/quote/buy|sell
-  ├── /agent/chat          ← Groq agentic loop
+  ├── /agent/chat          ← DGrid agentic loop
   └── /agent/tool/:name    ← OpenServ proxy
         │
         ▼
@@ -110,7 +110,7 @@ Scorer     Oracle
 
 **Backend:** Node.js 22, TypeScript, Express 5, viem
 **Frontend:** Next.js 14, Tailwind CSS
-**AI:** Groq API (Llama 3.3 70B)
+**AI:** DGrid API (Llama 3.3 70B)
 **Chain:** BNB Smart Chain Mainnet
 **DEX:** PancakeSwap V2
 

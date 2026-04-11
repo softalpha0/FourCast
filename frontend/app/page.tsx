@@ -464,7 +464,7 @@ export default function Landing() {
           <div className="flex flex-wrap justify-center gap-3">
             {[
               'TypeScript', 'Node.js', 'BNB Chain', 'PancakeSwap V2',
-              '@four-meme/four-meme-ai', 'Groq · Llama 3.3 70B', 'Next.js 15',
+              '@four-meme/four-meme-ai', 'DGrid · Llama 3.3 70B', 'Next.js 15',
             ].map(t => <TechBadge key={t} label={t} />)}
           </div>
 
