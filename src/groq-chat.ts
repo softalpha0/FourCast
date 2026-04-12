@@ -2,6 +2,8 @@ import { type Request, type Response } from 'express';
 
 const DGRID_API = 'https://api.dgrid.ai/v1/chat/completions';
 const DGRID_KEY = process.env.DGRID_API_KEY ?? '';
+const GROQ_API = 'https://api.groq.com/openai/v1/chat/completions';
+const GROQ_KEY = process.env.GROQ_API_KEY ?? '';
 const FOURCAST_API = process.env.FOURCAST_API_URL ?? 'http://localhost:3000';
 
 interface GroqMessage {
@@ -254,8 +256,12 @@ async function callFourCastTool(name: string, args: Record<string, unknown>): Pr
 }
 
 export async function handleAgentChat(req: Request, res: Response): Promise<void> {
-  if (!DGRID_KEY) {
-    res.status(503).json({ error: 'DGRID_API_KEY not configured' });
+  const activeKey = DGRID_KEY || GROQ_KEY;
+  const activeAPI = DGRID_KEY ? DGRID_API : GROQ_API;
+  const activeModel = DGRID_KEY ? 'groq/llama-3.3-70b-versatile' : 'llama-3.3-70b-versatile';
+
+  if (!activeKey) {
+    res.status(503).json({ error: 'No AI API key configured' });
     return;
   }
 
@@ -272,14 +278,14 @@ export async function handleAgentChat(req: Request, res: Response): Promise<void
 
   try {
     for (let iteration = 0; iteration < 5; iteration++) {
-      const dgridRes = await fetch(DGRID_API, {
+      const dgridRes = await fetch(activeAPI, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${DGRID_KEY}`,
+          'Authorization': `Bearer ${activeKey}`,
         },
         body: JSON.stringify({
-          model: 'groq/llama-3.3-70b-versatile',
+          model: activeModel,
           messages,
           tools: TOOLS,
           tool_choice: 'auto',
@@ -289,7 +295,7 @@ export async function handleAgentChat(req: Request, res: Response): Promise<void
 
       if (!dgridRes.ok) {
         const errText = await dgridRes.text();
-        res.status(502).json({ error: `DGrid error: ${errText}` });
+        res.status(502).json({ error: `AI API error: ${errText}` });
         return;
       }
 
