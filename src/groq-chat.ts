@@ -278,28 +278,27 @@ export async function handleAgentChat(req: Request, res: Response): Promise<void
 
   try {
     for (let iteration = 0; iteration < 5; iteration++) {
-      const dgridRes = await fetch(activeAPI, {
+      let apiRes = await fetch(activeAPI, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${activeKey}`,
-        },
-        body: JSON.stringify({
-          model: activeModel,
-          messages,
-          tools: TOOLS,
-          tool_choice: 'auto',
-          max_tokens: 2048,
-        }),
+        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${activeKey}` },
+        body: JSON.stringify({ model: activeModel, messages, tools: TOOLS, tool_choice: 'auto', max_tokens: 2048 }),
       });
 
-      if (!dgridRes.ok) {
-        const errText = await dgridRes.text();
+      if (!apiRes.ok && DGRID_KEY && GROQ_KEY) {
+        apiRes = await fetch(GROQ_API, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${GROQ_KEY}` },
+          body: JSON.stringify({ model: 'llama-3.3-70b-versatile', messages, tools: TOOLS, tool_choice: 'auto', max_tokens: 2048 }),
+        });
+      }
+
+      if (!apiRes.ok) {
+        const errText = await apiRes.text();
         res.status(502).json({ error: `AI API error: ${errText}` });
         return;
       }
 
-      const data = await dgridRes.json() as GroqResponse;
+      const data = await apiRes.json() as GroqResponse;
       const msg = data.choices[0].message;
 
       messages.push(msg);
